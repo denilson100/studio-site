@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dote — Support</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0a0a0a; --surface: #111; --border: #1e1e1e;
+    --green: #22c55e; --white: #f5f5f0; --muted: #666;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --mono: 'DM Mono', monospace;
+  }
+  body { background: var(--bg); color: var(--white); font-family: var(--mono); }
+  nav {
+    padding: 1.25rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-back { font-size: 0.75rem; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; }
+  .nav-back:hover { color: var(--green); }
+  .nav-logo { font-family: var(--serif); font-size: 1.1rem; color: var(--white); }
+  .content { max-width: 640px; margin: 0 auto; padding: 4rem 2rem; }
+  h1 { font-family: var(--serif); font-size: 2.5rem; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
+  h1 em { font-style: italic; color: var(--green); }
+  .subtitle { font-size: 0.8rem; color: var(--muted); margin-bottom: 3rem; }
+  .faq-item { border-bottom: 1px solid var(--border); padding: 1.5rem 0; }
+  .faq-q { font-size: 0.9rem; color: var(--white); margin-bottom: 0.75rem; font-weight: 500; }
+  .faq-a { font-size: 0.8rem; color: var(--muted); line-height: 1.8; }
+  .contact-box {
+    margin-top: 3rem; padding: 2rem;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; text-align: center;
+  }
+  .contact-box h2 { font-family: var(--serif); font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .contact-box p { font-size: 0.8rem; color: var(--muted); margin-bottom: 1.5rem; }
+  .contact-btn {
+    display: inline-block;
+    background: var(--green); color: #000;
+    text-decoration: none; padding: 0.75rem 1.5rem;
+    border-radius: 10px; font-size: 0.8rem; font-weight: 500;
+    transition: opacity 0.2s;
+  }
+  .contact-btn:hover { opacity: 0.85; }
+  footer { padding: 3rem 2rem; max-width: 640px; margin: 0 auto; border-top: 1px solid var(--border); font-size: 0.7rem; color: var(--muted); display: flex; justify-content: space-between; }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--white); }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/dote" class="nav-back">← Dote</a>
+  <span class="nav-logo">Support</span>
+</nav>
+<div class="content">
+  <h1>How can we<br><em>help?</em></h1>
+  <p class="subtitle">Find answers below or reach out directly.</p>
+
+  <div class="faq-item">
+    <div class="faq-q">How do I restore my purchase?</div>
+    <div class="faq-a">Open Dote → tap the lock icon to open the paywall → tap "Restore Purchase" at the bottom. Make sure you're signed in with the same Apple ID used for the original purchase.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Why aren't my habits syncing between devices?</div>
+    <div class="faq-a">Dote uses iCloud to sync your data. Make sure iCloud is enabled on both devices: Settings → [your name] → iCloud → toggle on for Dote. It may take a few minutes for data to appear.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">How do I add the widget to my home screen?</div>
+    <div class="faq-a">Long press on your home screen → tap the + button in the top corner → search for "Dote" → choose a widget size → tap Add Widget. Widget requires Dote Premium.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Can I delete a habit?</div>
+    <div class="faq-a">Yes. Tap on a habit to open its detail view → tap the trash icon in the top right corner → confirm deletion. This action cannot be undone.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Why does the app show missed days I haven't started yet?</div>
+    <div class="faq-a">The calendar shows days since the habit was created. Days before your first check-in appear as missed. This is intentional — it shows your full history from day one.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Is my data private?</div>
+    <div class="faq-a">Yes. Your habit data is stored locally on your device and synced via your personal iCloud account. We never see, collect or share your data. See our Privacy Policy for full details.</div>
+  </div>
+
+  <div class="contact-box">
+    <h2>Still need help?</h2>
+    <p>Send us an email and we'll get back to you within 24 hours.</p>
+    <a href="mailto:support@yourstudio.com" class="contact-btn">support@yourstudio.com</a>
+  </div>
+</div>
+<footer>
+  <span>© 2026 Your Studio</span>
+  <div style="display:flex;gap:2rem;">
+    <a href="/dote/privacy">Privacy Policy</a>
+    <a href="/dote">Back to Dote</a>
+  </div>
+</footer>
+</body>
+</html>
