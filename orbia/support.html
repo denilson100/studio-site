@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support — Orbia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #09090F; --bg2: #12121C; --player: #0A84FF;
+      --white: #F2F2F7; --gray: #8E8E93;
+    }
+    body {
+      background: var(--bg); color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px; line-height: 1.7;
+    }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(9,9,15,0.85); backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: 22px; color: var(--white); text-decoration: none;
+    }
+    .nav-back { color: var(--player); text-decoration: none; font-size: 14px; font-weight: 500; }
+    .container { max-width: 720px; margin: 0 auto; padding: 120px 24px 80px; }
+    .page-label {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--player); margin-bottom: 16px;
+    }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 800; letter-spacing: -1px;
+      margin-bottom: 8px; line-height: 1.1;
+    }
+    .hero-sub { color: var(--gray); font-size: 18px; margin-bottom: 56px; }
+    h2 { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; margin: 48px 0 20px; }
+    p { color: rgba(242,242,247,0.8); margin-bottom: 16px; }
+    a { color: var(--player); }
+
+    .faq-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .faq-item {
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      text-align: left;
+      padding: 20px 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .faq-question:hover { color: var(--player); }
+
+    .faq-icon {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: rgba(10,132,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    .faq-answer {
+      display: none;
+      padding: 0 24px 20px;
+      color: rgba(242,242,247,0.7);
+      font-size: 15px;
+    }
+
+    .faq-item.open .faq-answer { display: block; }
+
+    .contact-card {
+      background: var(--bg2);
+      border: 1px solid rgba(10,132,255,0.2);
+      border-radius: 20px;
+      padding: 40px;
+      margin-top: 48px;
+      text-align: center;
+    }
+
+    .contact-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 24px; font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .contact-card p { color: var(--gray); margin-bottom: 24px; }
+
+    .btn-contact {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: var(--player);
+      color: white;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.2s;
+      box-shadow: 0 0 30px rgba(10,132,255,0.3);
+    }
+    .btn-contact:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(10,132,255,0.5);
+    }
+
+    .divider { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 40px 0; }
+    footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 32px 24px; text-align: center; color: var(--gray); font-size: 13px; }
+    @media (max-width: 768px) { nav { padding: 16px 24px; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="/">Orbia</a>
+    <a class="nav-back" href="/">← Back</a>
+  </nav>
+
+  <div class="container">
+    <p class="page-label">Help Center</p>
+    <h1>Support</h1>
+    <p class="hero-sub">Having trouble? Find answers to common questions below or reach out to us directly.</p>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          How do I move my circle?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          Use the virtual joystick in the bottom-left corner of the map screen. Drag it in any direction to move your circle. Release it to stop moving.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          How do I absorb other players?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          Move your circle over a smaller player or NPC. If your circle is larger, you will absorb them automatically and gain their points. You cannot absorb players that are larger than you.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          What are the purple viruses?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          Viruses are special NPCs that appear when you have 500 or more points. If you collide with a virus, your points are cut in half — regardless of your size. Immunity does not protect you from viruses. Avoid them at all costs!
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          What are safe zones?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          Safe zones are green circles visible on the map. Inside a safe zone, no player can absorb another. They are generated near parks and public spaces in your city. Use them to rest safely or as a starting point when you first enter the game.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          What are portals?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          Portals are rare purple circles that appear on the map once per day. When you enter a portal, you can travel to another city around the world to find new rivals. You will receive a push notification when a portal opens near you. Portals stay active for 10 minutes.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          Why did my points decrease?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          Points decrease over time when you are inactive. If you haven't played in more than 1 hour, your effective points will start to decay. This encourages regular play. Your raw points are preserved and will be restored as you play actively again.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          Why can't I absorb NPCs anymore?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          Once you reach 1,000 points, you can no longer absorb NPCs. At this level, you must compete with real players to grow. This is by design to keep the game competitive at higher levels.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          How does immunity work?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          When you are absorbed by another player, you receive immunity for 5 minutes. During this time, no one can absorb you. The immunity countdown is shown as a ring around your circle on the map.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          How do I delete my account?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          To request account deletion, please email us at <a href="mailto:denilson100@gmail.com">denilson100@gmail.com</a> with the subject "Account Deletion Request". We will delete all your data within 7 business days.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          The app is not working. What should I do?
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          First, make sure you have a stable internet connection. Try closing and reopening the app. If the problem persists, try restarting your device. If none of these work, contact us with a description of the issue and your device model.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="contact-card">
+      <h3>Still need help?</h3>
+      <p>Our team is happy to assist you with any questions or issues not covered above.</p>
+      <a class="btn-contact" href="mailto:denilson100@gmail.com">
+        ✉️ Email Support
+      </a>
+    </div>
+
+  </div>
+
+  <footer>© 2026 Denilson Monteiro. All rights reserved.</footer>
+
+  <script>
+    function toggleFAQ(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+  </script>
+
+</body>
+</html>
