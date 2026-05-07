@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Stress Squish — Smash Stress Away</title>
+<meta name="description" content="The stress relief game that lets you vent safely and hilariously. Build an avatar, tap it around the screen, and squish your stress away."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --orange: #FF6B35;
+    --orange-dark: #E84210;
+    --dark: #0E0A06;
+    --cream: #FFF9F0;
+    --gray: #8A7A6E;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--dark);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(14,10,6,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,107,53,0.15);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--orange);
+    letter-spacing: 2px;
+  }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    color: rgba(255,249,240,0.6);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--cream); }
+  .nav-cta {
+    background: var(--orange);
+    color: #fff !important;
+    padding: 10px 22px;
+    border-radius: 100px;
+    font-weight: 700 !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--orange-dark) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 120px 40px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(255,107,53,0.18) 0%, transparent 70%);
+  }
+  .hero-circles {
+    position: absolute; inset: 0; pointer-events: none;
+  }
+  .hero-circles span {
+    position: absolute; border-radius: 50%;
+    border: 1px solid rgba(255,107,53,0.12);
+    animation: pulse 4s ease-in-out infinite;
+  }
+  .hero-circles span:nth-child(1) { width: 400px; height: 400px; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+  .hero-circles span:nth-child(2) { width: 600px; height: 600px; top: 50%; left: 50%; transform: translate(-50%,-50%); animation-delay: 0.5s; }
+  .hero-circles span:nth-child(3) { width: 800px; height: 800px; top: 50%; left: 50%; transform: translate(-50%,-50%); animation-delay: 1s; }
+  @keyframes pulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+  .hero-content {
+    position: relative; z-index: 1;
+    text-align: center; max-width: 720px;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,107,53,0.15);
+    color: var(--orange);
+    border: 1px solid rgba(255,107,53,0.3);
+    padding: 6px 16px; border-radius: 100px;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 12vw, 140px);
+    line-height: 0.9;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s ease 0.1s both;
+  }
+  .hero-title span { color: var(--orange); }
+  .hero-sub {
+    font-size: clamp(16px, 2vw, 20px);
+    color: rgba(255,249,240,0.65);
+    line-height: 1.6;
+    margin-bottom: 44px;
+    max-width: 520px; margin-left: auto; margin-right: auto;
+    animation: fadeUp 0.6s ease 0.2s both;
+  }
+  .hero-buttons {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp 0.6s ease 0.3s both;
+  }
+  .btn-primary {
+    background: var(--orange);
+    color: #fff;
+    padding: 16px 36px; border-radius: 100px;
+    font-size: 16px; font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.1s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); }
+  .btn-secondary {
+    border: 1.5px solid rgba(255,249,240,0.2);
+    color: var(--cream);
+    padding: 16px 36px; border-radius: 100px;
+    font-size: 16px; font-weight: 600;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.1s;
+  }
+  .btn-secondary:hover { border-color: rgba(255,249,240,0.5); transform: translateY(-2px); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* FEATURES */
+  .features {
+    padding: 100px 40px;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .section-label {
+    font-size: 12px; font-weight: 700;
+    color: var(--orange); letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1; letter-spacing: 1px;
+    margin-bottom: 60px;
+  }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .feature-card {
+    background: rgba(255,249,240,0.04);
+    border: 1px solid rgba(255,249,240,0.08);
+    border-radius: 20px;
+    padding: 32px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .feature-card:hover {
+    border-color: rgba(255,107,53,0.3);
+    transform: translateY(-4px);
+  }
+  .feature-icon {
+    font-size: 36px; margin-bottom: 16px; display: block;
+  }
+  .feature-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px; letter-spacing: 1px;
+    margin-bottom: 8px; color: var(--cream);
+  }
+  .feature-desc {
+    font-size: 15px; line-height: 1.6;
+    color: rgba(255,249,240,0.55);
+  }
+
+  /* HOW IT WORKS */
+  .how {
+    padding: 100px 40px;
+    background: rgba(255,107,53,0.04);
+    border-top: 1px solid rgba(255,107,53,0.1);
+    border-bottom: 1px solid rgba(255,107,53,0.1);
+  }
+  .how-inner { max-width: 1100px; margin: 0 auto; }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px; margin-top: 60px;
+  }
+  .step { text-align: center; }
+  .step-num {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px; letter-spacing: 1px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+  }
+  .step-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px; letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .step-desc {
+    font-size: 14px; line-height: 1.6;
+    color: rgba(255,249,240,0.55);
+  }
+
+  /* CTA */
+  .cta-section {
+    padding: 120px 40px;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,107,53,0.15) 0%, transparent 70%);
+  }
+  .cta-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+  .cta-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 8vw, 96px);
+    line-height: 0.95; letter-spacing: 2px;
+    margin-bottom: 24px;
+  }
+  .cta-title span { color: var(--orange); }
+  .cta-sub {
+    font-size: 18px; color: rgba(255,249,240,0.6);
+    margin-bottom: 40px; line-height: 1.6;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 40px;
+    border-top: 1px solid rgba(255,249,240,0.08);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px; color: var(--orange); letter-spacing: 2px;
+  }
+  .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+  .footer-links a {
+    color: rgba(255,249,240,0.4);
+    text-decoration: none; font-size: 13px;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--cream); }
+  .footer-copy {
+    color: rgba(255,249,240,0.25);
+    font-size: 12px;
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 16px 20px; }
+    .nav-links { gap: 16px; }
+    .hero { padding: 100px 20px 60px; }
+    .features, .how { padding: 60px 20px; }
+    .cta-section { padding: 80px 20px; }
+    footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">STRESS SQUISH</div>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#how">How it works</a>
+    <a href="support.html">Support</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="#download" class="nav-cta">Download</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-circles">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">👊 Available on the App Store</div>
+    <h1 class="hero-title">SMASH<br/><span>STRESS</span><br/>AWAY</h1>
+    <p class="hero-sub">Build an avatar that looks like anyone stressing you out. Tap them around the screen until the stress is gone. Safe. Hilarious. Satisfying.</p>
+    <div class="hero-buttons">
+      <a href="#download" class="btn-primary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download for iOS
+      </a>
+      <a href="#features" class="btn-secondary">Learn more</a>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="section-label">Features</div>
+  <h2 class="section-title">EVERYTHING YOU<br/>NEED TO VENT</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="feature-icon">🎨</span>
+      <div class="feature-title">Fully Customizable Avatar</div>
+      <p class="feature-desc">Face shape, hair, eyes, glasses, outfit and more. Make it look like anyone who stresses you out.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">💥</span>
+      <div class="feature-title">Satisfying Deformation</div>
+      <p class="feature-desc">Every tap squishes and deforms your target in real time. Watch it wobble, squish and spin away.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🏃</span>
+      <div class="feature-title">Chase Mechanic</div>
+      <p class="feature-desc">Hit it and it flees. Miss and it recovers. Keep chasing for maximum stress relief.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🔥</span>
+      <div class="feature-title">Escalating Combos</div>
+      <p class="feature-desc">The harder you hit, the wilder it gets. Build combos from Combo! all the way to LEGENDARY!</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🌍</span>
+      <div class="feature-title">7 Animated Environments</div>
+      <p class="feature-desc">Office, boxing ring, beach, space, neon, dojo, city — or use your own photo as background.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">📤</span>
+      <div class="feature-title">Share Your Score</div>
+      <p class="feature-desc">Show friends how many times you squished your target. Perfect for stories.</p>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div class="how-inner">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title">THREE STEPS TO<br/>FEEL BETTER</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-title">Create your target</div>
+        <p class="step-desc">Customize an avatar to look like whoever is stressing you out. Hair, face, glasses, outfit — make it personal.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-title">Tap to squish</div>
+        <p class="step-desc">Hit the character to deform it and send it flying. Miss and it recovers. Keep going until the stress is gone.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-title">Share the fun</div>
+        <p class="step-desc">Screenshot your score and share with friends. Because sometimes you just need to laugh about it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="download">
+  <div class="cta-inner">
+    <h2 class="cta-title">READY TO<br/><span>SQUISH?</span></h2>
+    <p class="cta-sub">Free to download. No sign-in required. Just pure, hilarious stress relief.</p>
+    <a href="#" class="btn-primary" style="font-size:18px;padding:18px 44px;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      Download on App Store
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">STRESS SQUISH</div>
+  <div class="footer-links">
+    <a href="support.html">Support</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="mailto:support@stresssquish.app">Contact</a>
+  </div>
+  <div class="footer-copy">© 2025 Stress Squish. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
